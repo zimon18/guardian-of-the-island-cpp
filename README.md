@@ -2,12 +2,30 @@
 
 A console RPG built as a team project for an introductory C/C++ programming course. Explore an island, collect items, survive turn-based encounters and face its guardian.
 
+| | |
+| --- | --- |
+| **Type** | Academic team project, four contributors |
+| **Language** | C++17, CMake, Python 3 for CLI tests |
+| **My documented part** | `Item` hierarchy and `MenuSystem` |
+| **Platforms** | Windows and Ubuntu, built and tested in GitHub Actions |
+| **Team repository** | [kacper-lebida/guardian-of-the-island-cpp](https://github.com/kacper-lebida/guardian-of-the-island-cpp) |
+
 ## My contribution
 
-The team credits in the original project README identify my contribution as the **item hierarchy** and **`MenuSystem`**. Kacper Lebida is credited with the inventory, save/load system, and game loop/state work; the other team contributions are listed below. This repository is a fork of the collaborative project and preserves those original credits.
+The team credits in the original project README identify my part as the **item hierarchy** and the **menu system**. The supplied project archive had no Git history, so this attribution follows the team's own documentation.
 
-- **Item hierarchy:** the `Item` base class and concrete weapon, healing, and armor item types.
-- **Menu system:** menu display, input handling, and dispatching player choices to the game.
+### Item hierarchy (`src/Item.h`, `src/Item.cpp`)
+
+- An abstract `Item` base class with a name, a value and pure virtual `use()`, `getDescription()`, `getType()` and `getPower()`.
+- Three concrete item types: `WeaponItem` raises attack, `HealingItem` restores HP and `ArmorItem` adds bonus HP.
+- `getType()` and `getPower()` give every item a type tag and a numeric power. The save system uses them to write items to a text file and to rebuild the correct subclass when a game is loaded.
+- The inventory stores items through base-class pointers, so it can use any item without knowing its concrete type. A new item type only needs a new subclass.
+
+### Menu system (`src/MenuSystem.h`, `src/MenuSystem.cpp`)
+
+- Displays the exploration menu: **E** explore, **I** inventory, **U** use item, **S** save, **Q** quit.
+- Dispatches each choice to the matching `Game` method and reports invalid options.
+- In the current version, input is read one line at a time, case is ignored and longer input is rejected, so typing `explore` does not trigger an action by accident. End of input is treated as quit. The end-of-input and input-recovery handling were tightened during portfolio preparation, described below.
 
 ## Gameplay
 
@@ -15,20 +33,20 @@ The team credits in the original project README identify my contribution as the 
 - Six enemy types, with one to five enemies per combat location.
 - Weapons increase attack; healing and armor items add HP. All items are consumed when used.
 - Randomized attacks and probabilistic escape/item-use actions during combat.
-- A final boss intended to appear after ten completed locations.
+- A final boss after ten completed locations.
 - Manual saving to `save.txt` and automatic loading at startup.
 
 ## Structure
 
-| Module | Responsibility |
-| --- | --- |
-| `Game` | Main loop, exploration, encounters, loot and boss progression |
-| `Character` | Character statistics and inventory ownership |
-| `Inventory` | Item storage, use and serialization |
-| `Item` | Abstract interface and weapon/healing/armor implementations |
-| `SaveSystem` | Player and progress persistence |
-| `MenuSystem` | Exploration menu and command dispatch |
-| `CombatSystem` | An unused placeholder; actual combat is implemented in `Game.cpp` |
+| Module | Responsibility | Credited to |
+| --- | --- | --- |
+| `Game` | Main loop, exploration, encounters, loot and boss progression | Kacper Lebida, Wiktor Kaczmarczyk, Tomasz Kraska |
+| `Character` | Character statistics and inventory ownership | Tomasz Kraska |
+| `Inventory` | Item storage, use and serialization | Kacper Lebida |
+| `Item` | Abstract interface and weapon/healing/armor implementations | **Szymon Baran** |
+| `SaveSystem` | Player and progress persistence | Kacper Lebida |
+| `MenuSystem` | Exploration menu and command dispatch | **Szymon Baran** |
+| `CombatSystem` | An unused placeholder; actual combat is implemented in `Game.cpp` | — |
 
 ## Build and run
 
@@ -51,11 +69,11 @@ g++ -std=c++17 -Wall -Wextra -Wpedantic src/*.cpp -o guardian
 
 On Windows with MinGW, use `-o guardian.exe`. The save file is written to the working directory. Python 3 is required for the optional CLI smoke tests.
 
-Controls: **E** explore, **I** inventory, **U** use item, **S** save, **Q** quit.
-
 ## Review status
 
-The portfolio version fixes boss progression, invalid damage ranges, malformed save handling, input recovery and restart state. Core regression tests and CLI smoke tests pass locally on Windows; direct C++17 builds with Zig 0.15.2 produce no compiler diagnostics. CMake configuration, build and CTest passed on both Windows and Ubuntu in [GitHub Actions run #1](https://github.com/kacper-lebida/guardian-of-the-island-cpp/actions/runs/34759763455).
+The portfolio version fixes boss progression, invalid damage ranges, malformed save handling, input recovery and restart state. These fixes, the regression tests and the CI workflow were prepared by Kacper Lebida in the team repository; this repository carries the same commits.
+
+CMake configuration, build and CTest run on both Windows and Ubuntu in this repository's [GitHub Actions workflow](../../actions/workflows/build.yml).
 
 See [portfolio preparation and validation](docs/portfolio-preparation.md) for changes, test coverage and remaining limitations. The original coursework and the later improvements are documented separately.
 

@@ -1,5 +1,7 @@
 # Portfolio preparation
 
+These changes were made by Kacper Lebida in the [team repository](https://github.com/kacper-lebida/guardian-of-the-island-cpp). This repository is a standalone copy with the same commit history, published so that my part of the team project (the `Item` hierarchy and `MenuSystem`) can be reviewed in my portfolio.
+
 The starting point was the supplied academic project archive, `RPG.zip`. The team attribution in the original README is retained. No Git history was included, so original branch names, reviews and individual commits cannot be verified from this archive.
 
 The following changes were made during portfolio preparation on 13 September 2026. They are separate from the original coursework contribution:
@@ -22,7 +24,7 @@ The core suite checks typed-item save/load round trips, invalid indices, eight m
 
 The CLI suite checks startup/EOF, recovery from invalid numeric input, rejection of corrupt saves, boss encounters at attack 15/92/93/1,000,000, damage bounds, exploration-to-finale progression and invalid combat choices.
 
-On 13 September 2026, [GitHub Actions run #1](https://github.com/kacper-lebida/guardian-of-the-island-cpp/actions/runs/34759763455) passed CMake configuration, compilation and CTest on both windows-latest and ubuntu-latest for commit e280cae3b70f042b6152073f5a59ee954e9974a8. Both core regression and CLI smoke tests are included in CTest. The initial local checks used direct compilation.
+On 13 September 2026, [GitHub Actions run #1 in the team repository](https://github.com/kacper-lebida/guardian-of-the-island-cpp/actions/runs/34759763455) passed CMake configuration, compilation and CTest on both windows-latest and ubuntu-latest for commit e280cae3b70f042b6152073f5a59ee954e9974a8. Both core regression and CLI smoke tests are included in CTest. The initial local checks used direct compilation. The same workflow runs on every push to this repository.
 
 ## Remaining limitations
 
