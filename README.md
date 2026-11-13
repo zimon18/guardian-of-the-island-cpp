@@ -4,11 +4,10 @@ A console RPG built as a team project for an introductory C/C++ programming cour
 
 ## My contribution
 
-The original project README credits **Kacper Lebida** with the inventory system, save/load system, and game loop/state work (`Game.h`). The supplied ZIP contains source code but no Git history, so this attribution follows the team's documentation.
+The team credits in the original project README identify my contribution as the **item hierarchy** and **`MenuSystem`**. Kacper Lebida is credited with the inventory, save/load system, and game loop/state work; the other team contributions are listed below. This repository is a fork of the collaborative project and preserves those original credits.
 
-- **Inventory:** polymorphic items owned by `std::unique_ptr` in a `std::vector`, numbered item selection, bounds checking and removal after use.
-- **Persistence:** text serialization of player statistics, exploration progress and item type/name/value/power; reconstruction of concrete item classes on load.
-- **Game state:** an exploration/combat/exit state model connecting the menu and gameplay systems.
+- **Item hierarchy:** the `Item` base class and concrete weapon, healing, and armor item types.
+- **Menu system:** menu display, input handling, and dispatching player choices to the game.
 
 ## Gameplay
 
